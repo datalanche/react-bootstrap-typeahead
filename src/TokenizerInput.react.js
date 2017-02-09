@@ -60,7 +60,32 @@ const TokenizerInput = React.createClass({
   },
 
   render() {
-    const {bsSize, disabled, hasAux, placeholder, selected, value} = this.props;
+    var autosizeInput = null;
+    const {bsSize, disabled, hasAux, maxMultiple, placeholder, selected, value} = this.props;
+
+    if (maxMultiple === null || selected.length < maxMultiple) {
+      autosizeInput =
+        <AutosizeInput
+          className="bootstrap-tokenizer-input"
+          disabled={disabled}
+          inputStyle={{
+            backgroundColor: 'inherit',
+            border: 0,
+            boxShadow: 'none',
+            cursor: 'inherit',
+            outline: 'none',
+            padding: 0,
+          }}
+          onBlur={this._handleBlur}
+          onChange={this._handleChange}
+          onFocus={this.props.onFocus}
+          onKeyDown={this._handleKeydown}
+          placeholder={selected.length ? null : placeholder}
+          ref="input"
+          type="text"
+          value={value}
+        />;
+    }
 
     return (
       <div
@@ -84,26 +109,7 @@ const TokenizerInput = React.createClass({
         }}
         tabIndex={-1}>
         {selected.map(this._renderToken)}
-        <AutosizeInput
-          className="bootstrap-tokenizer-input"
-          disabled={disabled}
-          inputStyle={{
-            backgroundColor: 'inherit',
-            border: 0,
-            boxShadow: 'none',
-            cursor: 'inherit',
-            outline: 'none',
-            padding: 0,
-          }}
-          onBlur={this._handleBlur}
-          onChange={this._handleChange}
-          onFocus={this.props.onFocus}
-          onKeyDown={this._handleKeydown}
-          placeholder={selected.length ? null : placeholder}
-          ref="input"
-          type="text"
-          value={value}
-        />
+        {autosizeInput}
       </div>
     );
   },

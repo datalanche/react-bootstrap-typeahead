@@ -85,6 +85,10 @@ const Typeahead = React.createClass({
       PropTypes.func,
     ]),
     /**
+     * Maximum number of selections allowed.
+     */
+    maxMultiple: PropTypes.number,
+    /**
      * Maximum number of results to display by default. Mostly done for
      * performance reasons so as not to render too many DOM nodes in the case of
      * large data sets.
@@ -152,6 +156,7 @@ const Typeahead = React.createClass({
       ignoreDiacritics: true,
       isLoading: false,
       labelKey: 'label',
+      maxMultiple: null,
       maxResults: 100,
       minLength: 0,
       multiple: false,
@@ -335,6 +340,7 @@ const Typeahead = React.createClass({
       bsSize,
       disabled,
       labelKey,
+      maxMultiple,
       minLength,
       multiple,
       name,
@@ -343,7 +349,7 @@ const Typeahead = React.createClass({
     } = this.props;
     const {activeIndex, activeItem, initialItem, selected, text} = this.state;
     const Input = multiple ? TokenizerInput : TypeaheadInput;
-    const inputProps = {bsSize, disabled, name, placeholder, renderToken};
+    const inputProps = {bsSize, disabled, maxMultiple, name, placeholder, renderToken};
 
     return (
       <Input
