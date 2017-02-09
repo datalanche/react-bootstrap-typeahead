@@ -6599,7 +6599,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    );
 	  },
 	  blur: function blur() {
-	    this.refs.input.blur();
+	    if (this.refs.input) {
+	      this.refs.input.blur();
+	    }
 	  },
 	  focus: function focus() {
 	    this._handleInputFocus();
@@ -6661,8 +6663,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // If the user clicks anywhere inside the tokenizer besides a token,
 	    // focus the input.
-	    this.refs.input.focus();
-	    this.setState({ isFocused: true });
+	    if (this.refs.input) {
+	      this.refs.input.focus();
+	      this.setState({ isFocused: true });
+	    }
 	  }
 	});
 

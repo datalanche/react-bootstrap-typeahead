@@ -5,7 +5,7 @@ import React, {PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
 import AutosizeInput from 'react-input-autosize';
 
-import Token from './Token';
+import Token from './Token.react';
 
 import getOptionLabel from './utils/getOptionLabel';
 import {BACKSPACE} from './utils/keyCode';
@@ -115,7 +115,9 @@ const TokenizerInput = React.createClass({
   },
 
   blur() {
-    this.refs.input.blur();
+    if (this.refs.input) {
+      this.refs.input.blur();
+    }
   },
 
   focus() {
@@ -180,8 +182,10 @@ const TokenizerInput = React.createClass({
 
     // If the user clicks anywhere inside the tokenizer besides a token,
     // focus the input.
-    this.refs.input.focus();
-    this.setState({isFocused: true});
+    if (this.refs.input) {
+      this.refs.input.focus();
+      this.setState({isFocused: true});
+    }
   },
 });
 
