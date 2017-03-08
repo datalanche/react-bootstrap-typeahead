@@ -3232,6 +3232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _props3 = this.props,
 	          caseSensitive = _props3.caseSensitive,
 	          minLength = _props3.minLength,
+	          multiple = _props3.multiple,
 	          onSearch = _props3.onSearch,
 	          useCache = _props3.useCache;
 
@@ -3252,8 +3253,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return;
 	      }
 
-	      // Only perform a search on user input, not selection.
-	      if (this.state.hasSelection) {
+	      // In the single-selection case, perform a search only on user input
+	      // not selection.
+	      if (!multiple && this.state.hasSelection) {
 	        return;
 	      }
 
